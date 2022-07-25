@@ -1,7 +1,7 @@
 <head>
     <script>
         fetch("https://api.github.com/repos/joshuasorkin/now-see-hear")
-        .then(json => console.log(json.description));
+        .then(json => console.log(JSON.parse(json).description));
     </script>
 </head>
 
