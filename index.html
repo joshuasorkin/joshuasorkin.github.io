@@ -24,7 +24,7 @@
                 let response = await fetch(`https://api.github.com/repos/joshuasorkin/${repo.name}`);
                 let data = await response.json();
                 repo.description = data.description;
-                repo.url = `${repo.name}.herokuapp.com`;
+                repo.url = `https://${repo.name}.herokuapp.com`;
                 createRepoDiv(repo);
             }
         }
@@ -48,7 +48,7 @@
 
 
 
-<h1>Joshua Sorkin</h1>
+<h1>Joshua Sorkin's App Portfolio</h1>
 <br />
 <h2>Applications live on the web:</h2>
 <div id="apps"></div>
