@@ -1,11 +1,48 @@
 <head>
     <script>
-        fetch("https://api.github.com/repos/joshuasorkin/now-see-hear")
-        .then(response => {
-            //console.log(response);
-            response.json()
-            .then(data => console.log(data.description));
-        });
+        const repos = [
+            {
+                name:"now-see-hear",
+                title:"Now See Hear"
+            },
+            {
+                name:"voice-maze",
+                title:"Voice Maze"
+            },
+            {
+                name:"nominous",
+                title:"Nominous"
+            },
+            {
+                name:"chat-is-art",
+                title:"Chat is Art"
+            }
+        ]
+        const appsDiv = document.getElementById("apps");
+        async function loadRepoMetadata(){
+            for(repo of repos){
+                let response = await fetch(`https://api.github.com/repos/joshuasorkin/${repo.name}`);
+                let data = await response.json();
+                repo.description = data.description;
+                repo.url = `${repo.name}.herokuapp.com`;
+                createRepoDiv(repo);
+            }
+        }
+
+        function createRepoDiv(repo){
+            const newDiv = document.createElement("div");
+            const anchorNode = document.createElement("a");
+            anchorNode.setAttribute("href",repo.url);
+            anchorNode.innerHTML = repo.title;
+            const div_description = document.createElement("div");
+            div_description.innerHTML = `${repo.description}<br /><br />`;
+            newDiv.appendChild(anchorNode);
+            newDiv.appendChild(div_description);
+            apps.appendChild(newDiv);
+        }
+
+        loadRepoMetadata();
+        
     </script>
 </head>
 
@@ -14,4 +51,5 @@
 <h1>Joshua Sorkin</h1>
 <br />
 <h2>Applications live on the web:</h2>
+<div id="apps"></div>
 
